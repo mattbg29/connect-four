@@ -1,0 +1,7 @@
+type ScoreTracker @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  score: Int
+  user: AWSEmail
+  botScore: Int
+}
+ 

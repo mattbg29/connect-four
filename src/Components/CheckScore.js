@@ -41,68 +41,67 @@ export function checkScore(row, col, playerNow, grid, target) {
     } 
     // check right diag for win
     score = 1
-    for (let i = row+1; i < 6; i++) {
+    let rowNow = row + 1
+    if (rowNow <= 5) {
         for (let j = col+1; j < 7; j++) {
-            if (grid[i*7+j].value === target) {
+            if (grid[rowNow*7+j].value === target) {
                 score++
-                i++
-                if (i > 5) {
+                rowNow++
+                if (rowNow > 5) {
                     break
                 }
             } else {
                 break
             }
-        }
-        break
+        }    
     }
 
-    for (let i = row-1; i >= 0; i--) {
+    rowNow = row - 1
+    if (rowNow >= 0) {
         for (let j = col-1; j >=0; j--) {
-            if (grid[i*7+j].value === target) {
+            if (grid[rowNow*7+j].value === target) {
                 score++
-                i--
-                if (i < 0) {
+                rowNow--
+                if (rowNow < 0) {
                     break
                 }
             } else {
                 break
             }
         }
-        break
     }
     if (score === 4) {
         return 1        
     } 
 
     score = 1
-    for (let i = row+1; i < 6; i++) {
+    rowNow = row + 1
+    if (rowNow <= 5) {
         for (let j = col-1; j >= 0; j--) {
-            if (grid[i*7+j].value === target) {
+            if (grid[rowNow*7+j].value === target) {
                 score++
-                i++
-                if (i > 5) {
+                rowNow++
+                if (rowNow > 5) {
                     break
                 }
             } else {
                 break
             }
         }
-        break
     }
-
-    for (let i = row-1; i >= 0; i--) {
-        for (let j = col+1; j <7; j++) {
-            if (grid[i*7+j].value === target) {
+    rowNow = row - 1
+    if (rowNow >= 0) {
+            for (let j = col+1; j <7; j++) {
+            if (grid[rowNow*7+j].value === target) {
                 score++
-                i--
-                if (i < 0) {
+                rowNow--
+                if (rowNow < 0) {
                     break
                 }
             } else {
                 break
             }
         }
-        break
     }
     if (score === 4) {
         return 1       
