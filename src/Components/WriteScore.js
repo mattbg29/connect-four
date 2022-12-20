@@ -1,6 +1,7 @@
 import { DataStore } from '@aws-amplify/datastore';
-import { ScoreTracker } from './models';
+import { ScoreTracker } from '../models';
 
+// writes the user score, bot score, and username to the databaset
 export default async function writeScore(username, score, botScore) {
     try {
         await DataStore.save(
@@ -16,6 +17,8 @@ export default async function writeScore(username, score, botScore) {
     }
 }
 
+// updates the score and botscore for hte given user by deleting the score and re-writing with the
+// original score plus 1 for whoever won (user vs bot), since direct updates are not allowed
 export async function updateScore(username, score, botScore) {
     try {
         const curData = await DataStore.query(ScoreTracker)
@@ -28,6 +31,7 @@ export async function updateScore(username, score, botScore) {
       }
 }
 
+// gets the score data for the given user
 export async function getScore(username) {
     try {
         const curData = await DataStore.query(ScoreTracker)

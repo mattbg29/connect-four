@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react"
-import tokenOpen from './tokenOpen.png'
-import tokenRed from './tokenRed.png'
-import tokenYellow from './tokenYellow.png'
-import tokenRedIcon from './tokenRedIcon.png'
-import tokenYellowIcon from './tokenYellowIcon.png'
-import { checkScore } from "./Components/CheckScore"
-import { startBot } from "./Components/Bot"
+import tokenOpen from '../Assets/tokenOpen.png'
+import tokenRed from '../Assets/tokenRed.png'
+import tokenYellow from '../Assets/tokenYellow.png'
+import tokenRedIcon from '../Assets/tokenRedIcon.png'
+import tokenYellowIcon from '../Assets/tokenYellowIcon.png'
+import { checkScore } from "./CheckScore"
+import { startBot } from "./Bot"
 import { updateScore, getScore } from './WriteScore';
 import { UserContext } from "./SignUp";
 
@@ -15,6 +15,7 @@ import { UserContext } from "./SignUp";
 // need to make it so user/bot score increments at end of game, not on 'new game' click
 // need to hide user and bot scores when user is not logged in
 
+// For filling the grid initially with empty tokens
 
 export function Game() {
     const [grid, setGrid] = useState([])
@@ -32,17 +33,10 @@ export function Game() {
     useEffect(() => {
         fillGrid()
         newGame()
-        console.log('use effect')
     }, [user])
 
-    // For selecting betw player choices; this might be unecessary
-    const playerChoice ={
-        Red: tokenRed,
-        Yellow: tokenYellow
-    }
-
-    // For filling the grid initially with empty tokens
-    const fillGrid = () => {
+    function fillGrid() {
+        
         let k = 0
         const newGrid = []
         for (let i = 0; i < 6; i++) {
@@ -57,6 +51,12 @@ export function Game() {
             }
         }
         setGrid([...newGrid])
+    }
+
+    // For selecting betw player choices; this might be unecessary
+    const playerChoice ={
+        Red: tokenRed,
+        Yellow: tokenYellow
     }
 
     async function getUserData() {
@@ -77,7 +77,7 @@ export function Game() {
         if (row === 5 || grid[(((row+1)*7)+col)].value !== tokenOpen) {
 
             // check if the selected spot is a win
-            const winnerNow = checkScore(row, col, playerNow, grid, playerChoice[playerNow])
+            const winnerNow = checkScore(row, col, grid, playerChoice[playerNow])
             setWinner(winnerNow)
             if (winnerNow === 1) {
                 if(user.name !== '') {
@@ -144,39 +144,21 @@ export function Game() {
 }
 
     // Build the board with the selected tokens and functionality for future selects
-    function ShowVisualGrid2(props) {
-        const newVisual = []
-        let k = 0
-        for (let i = 0; i < 6; i++) {
-            const rowNow = props.grid.filter(token => token.row === i) 
-            newVisual.push(
-                <div key={i} style={{display: 'flex'}}>
-                    {rowNow.map(token => <img style={{cursor: 'pointer'}} 
-                    onClick={() => token.value === props.tokenOpen && props.winner === 0 ? props.playerClicks(token.row, token.col, props.curPlayer, 1) : ""} 
-                    className="token" key={k++} src={token.value}/>)}
-                </div>)
-        }
-        return (
-            newVisual
-        )
+function ShowVisualGrid2(props) {
+    const newVisual = []
+    let k = 0
+    for (let i = 0; i < 6; i++) {
+        const rowNow = props.grid.filter(token => token.row === i) 
+        newVisual.push(
+            <div key={i} style={{display: 'flex'}}>
+                {rowNow.map(token => <img style={{cursor: 'pointer'}} 
+                onClick={() => token.value === props.tokenOpen && props.winner === 0 ? props.playerClicks(token.row, token.col, props.curPlayer, 1) : ""} 
+                className="token" key={k++} src={token.value}/>)}
+            </div>)
     }
+    return (
+        newVisual
+    )
+}
 
-    /*
-        // Build the board with the selected tokens and functionality for future selects
-    function ShowVisualGrid() {
-        const newVisual = []
-        let k = 0
-        for (let i = 0; i < 6; i++) {
-            const rowNow = grid.filter(token => token.row === i) 
-            newVisual.push(
-                <div key={i} style={{display: 'flex'}}>
-                    {rowNow.map(token => <img style={{cursor: 'pointer'}} 
-                    onClick={() => token.value === tokenOpen && winner === 0 ? playerClicks(token.row, token.col, curPlayer, 1) : ""} 
-                    className="token" key={k++} src={token.value}/>)}
-                </div>)
-        }
-        return (
-            newVisual
-        )
-    }
-    */
+  

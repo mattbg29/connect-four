@@ -7,13 +7,17 @@ function NavBar() {
     const [modal, setModal] = useState(false)
     const { user, logout } = useContext(UserContext)
   
-    const handleClick = () => {
-            setModal(!modal)        
-  };
+    const handleLogin = () => {
+      setModal(!modal)        
+    };
 
-  const handleClickOut = () => {
-    setModal(!modal)
-    logout()
+    const handleSignUp = () => {
+      setModal(!modal)        
+    };
+
+    const handleLogout = () => {
+      setModal(!modal)
+      logout()
   };
 
   return (
@@ -21,14 +25,17 @@ function NavBar() {
       {user.name === '' ? 
       <>
             <div style={{float: 'right', marginRight: '5vw'}}>
-                <span onClick={handleClick} className="loginicon">
-                Sign In
+                <span onClick={() => modal ? setModal(!modal) : setModal('Sign In')} className="loginicon">
+                Sign In 
+                </span>
+                <span onClick={() => modal ? setModal(!modal) : setModal('Sign Up')} className="loginicon">
+                Sign Up
                 </span>
             </div>
-            {modal && user.name === '' && <LoginForm />}
+            {modal && user.name === '' && <LoginForm task={modal} />}
       </>
       : <div style={{float: 'right', marginRight: '5vw'}}>
-        <span onClick={handleClickOut} className="loginicon">
+        <span onClick={handleLogout} className="loginicon">
           Sign Out
         </span>
       </div>}

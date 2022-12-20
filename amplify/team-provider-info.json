@@ -16,5 +16,23 @@
         "connectfour": {}
       }
     }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-connectfour-dev-173645-authRole",
+      "UnauthRoleArn": "arn:aws:iam::174818985139:role/amplify-connectfour-dev-173645-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::174818985139:role/amplify-connectfour-dev-173645-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-connectfour-dev-173645-deployment",
+      "UnauthRoleName": "amplify-connectfour-dev-173645-unauthRole",
+      "StackName": "amplify-connectfour-dev-173645",
+      "StackId": "arn:aws:cloudformation:us-east-1:174818985139:stack/amplify-connectfour-dev-173645/cd252440-80b6-11ed-b9b6-12d1515325c9",
+      "AmplifyAppId": "d1fufl3sxw5u4y"
+    },
+    "categories": {
+      "auth": {
+        "connectfour": {}
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-export function checkScore(row, col, playerNow, grid, target) {
+export function checkScore(row, col, grid, target) {
     //check row for win
     let score = 1
     for (let i = col+1; i < 7; i++) {

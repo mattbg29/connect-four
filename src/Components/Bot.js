@@ -1,6 +1,6 @@
-import tokenOpen from '../tokenOpen.png'
-import tokenRed from '../tokenRed.png'
-import tokenYellow from '../tokenYellow.png'
+import tokenOpen from '../Assets/tokenOpen.png'
+import tokenRed from '../Assets/tokenRed.png'
+import tokenYellow from '../Assets/tokenYellow.png'
 import { checkScoreBot } from "./CheckScoreBot.js"
 import { checkScore } from "./CheckScore.js"
 
@@ -19,7 +19,7 @@ export function startBot(playerNow, gridNew) {
     for (let colNow = 0; colNow < 7; colNow++) {
         for (let rowCheck = 5; rowCheck > 0; rowCheck--) {
             if (gridNew[rowCheck*7+colNow].value === tokenOpen) {
-                if (checkScore(rowCheck, colNow, playerNow, gridNew, playerNow) !== 0 || checkScore(rowCheck, colNow, otherPlayer, gridNew, otherPlayer) !== 0) {
+                if (checkScore(rowCheck, colNow, gridNew, playerNow) !== 0 || checkScore(rowCheck, colNow, gridNew, otherPlayer) !== 0) {
                     return colNow
                 }
                 gridNew[rowCheck*7+colNow].value = playerNow

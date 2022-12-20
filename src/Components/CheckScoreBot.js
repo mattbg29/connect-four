@@ -1,4 +1,4 @@
-import tokenOpen from '../tokenOpen.png'
+import tokenOpen from '../Assets/tokenOpen.png'
 
 export function checkScoreBot(row, col, grid, target) {
     //check row for win
